@@ -81,6 +81,21 @@ public class Tile {
             quantities[index]--;
             return tiles[index];
         }
+
+        public void put(Tile tile){
+            index = tile.letter - 'A';
+            if(index >= 0 && index < 26 && quantities[index] < getQuantity(tile.letter)){
+            quantities[index]++;
+            }
+        }
+
+        public int size(){
+            int sum = 0;
+            for(int i : quantities){
+                sum += i;
+            }
+            return sum;
+        }
     }
 	
 }
