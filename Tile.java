@@ -55,6 +55,47 @@ public class Tile {
             }
         }
 
+        private static int getScore(char letter){
+            switch (letter) {
+                case 'A': case 'E': case 'I': case 'L': case 'N': case 'O': case 'R': case 'S': case 'T': case 'U':
+                    return 1;
+                case 'D': case 'G':
+                    return 2;
+                case 'B': case 'C': case 'M': case 'P':
+                    return 3;
+                case 'F': case 'H': case 'V': case 'W': case 'Y':
+                    return 4;
+                case 'K':
+                    return 5;
+                case 'J': case 'X':
+                    return 8;
+                case 'Q': case 'Z':
+                    return 10;
+                default:
+                    return 0;
+            }
+        }
+
+        private static int getQuantity(char letter) {
+            switch (letter) {
+                case 'A': case 'I':
+                    return 9;
+                case 'B': case 'C': case 'F': case 'H': case 'M': case 'P': case 'V': case 'W': case 'Y':
+                    return 2;
+                case 'D': case 'L': case 'S': case 'U':
+                    return 4;
+                case 'E':
+                    return 12;
+                case 'G': case 'O':
+                    return 3;
+                case 'J': case 'K': case 'Q': case 'X': case 'Z':
+                    return 1;
+                case 'N': case 'R': case 'T':
+                    return 6;
+                default:
+                    return 0;
+            }
+
         public static Bag getBag(){
             if (bag == null){
                 bag = new Bag();
@@ -96,6 +137,9 @@ public class Tile {
             }
             return sum;
         }
+
+        public int[] getQuantities(){
+            return quantities.clone();
+        }
     }
-	
 }
