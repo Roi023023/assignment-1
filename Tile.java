@@ -75,7 +75,11 @@ public class Tile {
         }
 
         public Tile getTile(char letter){
-            
+            int index = letter - 'A';
+            if (index < 0 || index >= 26 || quantities[index] == 0) return null;
+
+            quantities[index]--;
+            return tiles[index];
         }
     }
 	
