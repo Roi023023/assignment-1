@@ -95,6 +95,7 @@ public class Tile {
                 default:
                     return 0;
             }
+        }
 
         public static Bag getBag(){
             if (bag == null){
