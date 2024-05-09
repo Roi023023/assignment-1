@@ -125,7 +125,7 @@ public class Tile {
         }
 
         public void put(Tile tile){
-            index = tile.letter - 'A';
+            int index = tile.letter - 'A';
             if(index >= 0 && index < 26 && quantities[index] < getQuantity(tile.letter)){
             quantities[index]++;
             }
