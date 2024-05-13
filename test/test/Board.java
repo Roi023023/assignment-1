@@ -6,7 +6,8 @@ import java.util.Arrays;
 public class Board {
     private static Board board = null;
     private Tile[][] tiles;
-    
+    boolean isStarUsed = true;
+
     private Board() {
         tiles = new Tile[15][15];
     }
@@ -48,8 +49,11 @@ public class Board {
         for (int i = 0; i < wordTiles.length; i++) {
             int r = vertical ? row + i : row;
             int c = vertical ? col : col + i;
-            if (tiles[r][c] != null && tiles[r][c] != wordTiles[i]) {//TODO:i have a problem here with the null 
+            if (tiles[r][c] != null && wordTiles[i] != null && tiles[r][c] != wordTiles[i]) {//TODO:i have a problem here with the null 
                 return false;
+            }
+            if (tiles[r][c] != null && wordTiles[i] == null){//TODO:i add to change '_' for what is in this place.
+                wordTiles[i] = tiles[r][c];
             }
         }
         
@@ -184,7 +188,7 @@ public class Board {
             
             int letterScore = 0;
             int letterMultiplier = 1;
-            if(wordTiles[i] != null)
+            if(wordTiles[i] != null)//TODO:can delete this if statment
             {
                 letterScore = wordTiles[i].score;
             }
@@ -227,11 +231,17 @@ public class Board {
     }
     
     private boolean isDoubleWordScore(int row, int col) {
+        
+        if (isStarUsed && row == 7 && col == 7) {
+            isStarUsed = false;
+            return true;
+        }
+        
         return (row == 1 || row == 13) && (col == 1 || col == 13)
-                || (row == 2 || row == 12) && (col == 2 || col == 12)
-                || (row == 3 || row == 11) && (col == 3 || col == 11)
-                || (row == 4 || row == 10) && (col == 4 || col == 10)
-                || (row == 7) && (col == 7);//TODO:add one more in row 7 col 7.star
+        || (row == 2 || row == 12) && (col == 2 || col == 12)
+        || (row == 3 || row == 11) && (col == 3 || col == 11)
+        || (row == 4 || row == 10) && (col == 4 || col == 10);
+        
     }
     
     private boolean isTripleWordScore(int row, int col) {
@@ -257,9 +267,9 @@ public class Board {
             score += getScore(newWord);
             placeWord(newWord);
         }
-        
         return score;
     }
+
     
     private void placeWord(Word word) {
         int row = word.getRow();
