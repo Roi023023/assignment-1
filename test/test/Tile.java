@@ -104,6 +104,8 @@ public class Tile {
             return bag;
         }
 
+        
+
         public Tile getRand(){
             if (size() == 0) return null;
 
@@ -142,5 +144,10 @@ public class Tile {
         public int[] getQuantities(){
             return quantities.clone();
         }
+    }
+
+    public int getValue() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getValue'");
     }
 }
