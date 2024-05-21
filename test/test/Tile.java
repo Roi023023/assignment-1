@@ -35,8 +35,16 @@ public class Tile {
         return true;
     }
 
+    public char getLetter() {
+        return letter;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     public static class Bag{
-        private static Bag bag = null; // Singleton
+        private static Bag bag = null; 
 
         private int[] quantities;
         private Tile[] tiles;
@@ -46,9 +54,9 @@ public class Tile {
             tiles = new Tile[26];
 
             for (int i = 0; i < 26; i++){
-                char letter = (char) ('A' + i);
-                int score = getScore(letter);
-                int quantity = getQuantity(letter);
+                char letter = (char) ('A' + i);//TODO:
+                int score = getScore(letter);//use the getScore() method
+                int quantity = getQuantity(letter);//use the getQuantity() method
                 
                 quantities[i] = quantity;
                 tiles[i] = new Tile(letter, score);
@@ -97,18 +105,8 @@ public class Tile {
             }
         }
 
-        public static Bag getBag(){
-            if (bag == null){
-                bag = new Bag();
-            }
-            return bag;
-        }
-
-        
-
         public Tile getRand(){
             if (size() == 0) return null;
-
             int index;
             do{
                 index = (int) (Math.random() * 26);
@@ -119,18 +117,17 @@ public class Tile {
         }
 
         public Tile getTile(char letter){
-            int index = letter - 'A';
-            if (index < 0 || index >= 26 || quantities[index] == 0) return null;
-
+            int index = letter - 'A';//return the letter number.
+            if (index < 0 || index >= 26 || quantities[index] == 0) return null;//if its not a letter. or no quantities in beg left.
             quantities[index]--;
             return tiles[index];
         }
 
-        public void put(Tile tile){
-            int index = tile.letter - 'A';
-            if(index >= 0 && index < 26 && quantities[index] < getQuantity(tile.letter)){
-            quantities[index]++;
+        public static Bag getBag(){
+            if (bag == null){
+                bag = new Bag();
             }
+            return bag;
         }
 
         public int size(){
@@ -141,13 +138,15 @@ public class Tile {
             return sum;
         }
 
+        public void put(Tile tile){
+            int index = tile.letter - 'A';
+            if(index >= 0 && index < 26 && quantities[index] < getQuantity(tile.letter)){
+            quantities[index]++;
+            }
+        }
+
         public int[] getQuantities(){
             return quantities.clone();
         }
-    }
-
-    public int getValue() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getValue'");
     }
 }
